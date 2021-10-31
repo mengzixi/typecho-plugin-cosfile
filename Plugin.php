@@ -120,6 +120,7 @@ class CosForTypecho_Plugin implements Typecho_Plugin_Interface {
      * @return mixed
      */
     public static function uploadHandle($file) {
+        
         if (empty($file['name'])) {
             return false;
         }
@@ -137,7 +138,7 @@ class CosForTypecho_Plugin implements Typecho_Plugin_Interface {
         $fileName = sprintf('%u', crc32(uniqid())) . '.' . $ext;
         $path = $fileDir . '/' . $fileName;
         //获得上传文件
-        $uploadfile = self::getUploadFile($file);
+         $uploadfile = self::getUploadFile($file);
         //如果没有临时文件，则退出
         if (!isset($uploadfile)) {
             return false;
@@ -147,13 +148,22 @@ class CosForTypecho_Plugin implements Typecho_Plugin_Interface {
         //初始化COS
         $cosClient = self::CosInit();
         try {
+            if($file['bytes']){
             $cosClient->upload(
+                $bucket = $options->bucket .'-'. $options->appid,
+                $key = $path,
+                $body = $uploadfile);
+            }else{
+                $cosClient->upload(
                 $bucket = $options->bucket .'-'. $options->appid,
                 $key = $path,
                 $body = fopen($uploadfile, 'rb'),
                 $options = array(
                     "ACL"=>'public-read',
                     'CacheControl' => 'private'));
+            }
+        
+            
         } catch (Exception $e) {
             echo "$e\n";
             return false;
