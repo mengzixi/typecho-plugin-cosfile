@@ -52,7 +52,7 @@ class CosForTypecho_Plugin implements Typecho_Plugin_Interface {
     public static function config(Typecho_Widget_Helper_Form $form) {
         $desc = new Typecho_Widget_Helper_Form_Element_Text('desc', NULL, '', _t('插件使用说明：'),
             _t('<ol>
-                      <li>插件基于腾讯云cos-php-sdk-v5开发，若发现插件不可用，请到本插件 <a target="_blank" href="https://github.com/CharmeRyl/typecho-plugin-cosfile">GitHub发布地址</a> 检查是否有更新，或者提交Issues。<br></li>
+                      <li>插件基于腾讯云cos-php-sdk-v5开发，若发现插件不可用，请到本插件 <a target="_blank" href="https://github.com/mengzixi/typecho-plugin-cosfile/">GitHub发布地址</a> 检查是否有更新，或者提交Issues。<br></li>
                       <li>在腾讯云控制台 <a target="_blank" href="https://console.cloud.tencent.com/capi">个人API密钥</a> 页面里获取 APPID、SecretId、SecretKey 内容。<br></li>
                       <li>插件不会验证配置的正确性，请自行确认配置信息正确，否则不能正常使用。<br></li>
                       <li>插件会替换所有之前上传的文件的链接，若启用插件前存在已上传的数据，请自行将其上传至COS相同目录中以保证正常显示；同时，禁用插件也会导致链接恢复，也请自行将数据下载至相同目录中。<br></li>
